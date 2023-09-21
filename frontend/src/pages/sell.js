@@ -2,7 +2,10 @@ import { useState } from 'react';
 import SellCss from './css/sell.module.css'
 import placeholder from '../assets/images/placeholder.png'
 import { useAuthContext } from '../hooks/useAuthContext';
+import { useNavigate } from 'react-router-dom';
+
 const Sell = () => {
+	const navigate = useNavigate();
 	const backendURL = process.env.REACT_APP_BACKEND;
 	console.log('Backend: ',backendURL)
 	const {user}=useAuthContext()
@@ -159,6 +162,8 @@ const Sell = () => {
 	  if(!response.ok){
 		setError(json.error)
 		  console.log(json.error)
+	  }else {
+		navigate('/'); 
 	  }
 	} catch (error) {
 	  console.log('Error submitting data:', error);
