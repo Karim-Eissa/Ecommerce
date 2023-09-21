@@ -160,7 +160,7 @@ const Sell = () => {
 		  console.log(json.error)
 	  }
 	} catch (error) {
-	  console.error('Error submitting data:', error);
+	  console.log('Error submitting data:', error);
 	}
   };
   return (
