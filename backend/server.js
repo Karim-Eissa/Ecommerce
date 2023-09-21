@@ -8,7 +8,7 @@ require('dotenv').config();
 
 const app=express()
 app.use(cors({
-	origin:['https://ecommerce-lbok.onrender.com','https://e-shop-7j3o.onrender.com/']
+	origin:['https://ecommerce-lbok.onrender.com','https://e-shop-7j3o.onrender.com']
 }));
 app.use(morgan('dev'));
 app.use(express.json({ limit: '50mb' }));
