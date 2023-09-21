@@ -125,6 +125,7 @@ const Sell = () => {
 	}
 	}
   const handleFormSubmit = async (e) => {  
+	  e.preventDefault();
 	if(!user){
 		setError('You must be logged in')
 		return
@@ -141,6 +142,7 @@ const Sell = () => {
       description,
 	};
 	try {
+		console.log('backend url: ',backendURL)
 	  const response=await fetch(`${backendURL}/api/submit`, {
 		method: 'POST',
 		crossDomain:true,
@@ -155,6 +157,7 @@ const Sell = () => {
 	  const json=await response.json()
 	  if(!response.ok){
 		setError(json.error)
+		  console.log(json.error)
 	  }
 	} catch (error) {
 	  console.error('Error submitting data:', error);
