@@ -2,8 +2,9 @@ import { useState } from 'react';
 import SellCss from './css/sell.module.css'
 import placeholder from '../assets/images/placeholder.png'
 import { useAuthContext } from '../hooks/useAuthContext';
-
+import {useNavigate} from 'react-router-dom'
 const Sell = () => {
+	const navigate=useNavigate()
 	const backendURL = process.env.REACT_APP_BACKEND;
 	const {user}=useAuthContext()
 	const [image, setImage] = useState('');
