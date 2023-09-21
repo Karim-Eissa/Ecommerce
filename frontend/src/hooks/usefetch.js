@@ -9,8 +9,6 @@ const useFetch=(url)=>{
 	useEffect(()=>{
 		const fetchData=async()=>{
 			const urll=backendURL+url
-			console.log('env: ',backendURL)
-			console.log('urll: ',backendURL+url)
 			const response= await fetch(urll)
 			const json=await response.json()
 			if(!response.ok){
