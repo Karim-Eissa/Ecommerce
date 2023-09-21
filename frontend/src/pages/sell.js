@@ -2,12 +2,9 @@ import { useState } from 'react';
 import SellCss from './css/sell.module.css'
 import placeholder from '../assets/images/placeholder.png'
 import { useAuthContext } from '../hooks/useAuthContext';
-import { useNavigate } from 'react-router-dom';
 
 const Sell = () => {
-	const navigate = useNavigate();
 	const backendURL = process.env.REACT_APP_BACKEND;
-	console.log('Backend: ',backendURL)
 	const {user}=useAuthContext()
 	const [image, setImage] = useState('');
 	const [firstDropdownValue, setFirstDropdownValue] = useState('');
@@ -146,7 +143,6 @@ const Sell = () => {
       description,
 	};
 	try {
-		console.log('backend url: ',backendURL)
 	  const response=await fetch(`${backendURL}/api/submit`, {
 		method: 'POST',
 		crossDomain:true,
@@ -161,9 +157,8 @@ const Sell = () => {
 	  const json=await response.json()
 	  if(!response.ok){
 		setError(json.error)
-		  console.log(json.error)
 	  }else {
-		navigate('/'); 
+		navigate('https://e-shop-7j3o.onrender.com/'); 
 	  }
 	} catch (error) {
 	  console.log('Error submitting data:', error);
