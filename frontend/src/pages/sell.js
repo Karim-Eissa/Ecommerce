@@ -4,6 +4,7 @@ import placeholder from '../assets/images/placeholder.png'
 import { useAuthContext } from '../hooks/useAuthContext';
 const Sell = () => {
 	const backendURL = process.env.REACT_APP_BACKEND;
+	console.log('Backend: ',backendURL)
 	const {user}=useAuthContext()
 	const [image, setImage] = useState('');
 	const [firstDropdownValue, setFirstDropdownValue] = useState('');
