@@ -49,8 +49,7 @@ const Navbar = () => {
 
   const handleSearch = (e) => {
     e.preventDefault()
-    const query = e.target.value;
-    navigate(`/api/search?query=${query}`);
+    navigate(`/api/search?query=${searchQuery}`);
   };
 
  const handleInputChange = async (e) => {
