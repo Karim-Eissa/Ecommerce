@@ -6,8 +6,9 @@ import Product from '../components/product';
 import { useLocation } from 'react-router-dom';
 
 const SearchResults = () => {
-	const location = useLocation();
-  const searchValue = new URLSearchParams(location.search).get('search');
+  const location = useLocation();
+  const searchValue = new URLSearchParams(location.search).get('query');
+  console.log("searchValue:", searchValue);
 	const { content, pending,error,errorTwo } = useFetch(`/api/search?query=${searchValue}`);
 
     return (
