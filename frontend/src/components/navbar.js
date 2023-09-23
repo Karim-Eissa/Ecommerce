@@ -86,7 +86,7 @@ const handleLogout=()=>{
       </div>
       <div className={NavbarCss.navTwo}>
         <div className={NavbarCss.navTwoInner}>
-          <form onSubmit={handleSearch}>
+          <form onSubmit={handleSearch} action=''>
             <input
               type='text'
               name='search'
