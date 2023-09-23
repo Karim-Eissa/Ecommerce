@@ -123,6 +123,7 @@ const User = require('../models/usersModel')
 			const newProduct = new Product({
 				image:base64,name,category,type,brand,price,color,condition,description,user_id
 			});
+			res.status(200).json({ message: 'Product saved successfully'})
 			await newProduct.save();
 			console.log('product saved')
 		  } catch (error) {
