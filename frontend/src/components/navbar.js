@@ -48,6 +48,7 @@ const Navbar = () => {
     }  }, [location.pathname]);
 
   const handleSearch = (e) => {
+    e.preventDefault();
     const query = e.target.value;
     navigate(`/api/search?query=${query}`);
   };
