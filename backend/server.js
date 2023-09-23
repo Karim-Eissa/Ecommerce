@@ -17,7 +17,7 @@ app.use(express.urlencoded({ extended: true }));
 mongoose.connect(process.env.dbURL)
 .then(()=>{
 	app.listen(process.env.PORT,()=>{
-		console.log('db connected and listening to port',process.env.PORT);
+		console.log('db connected and listening to port');
 	})
 })
 .catch((err)=>{
