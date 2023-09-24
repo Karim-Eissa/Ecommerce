@@ -19,19 +19,19 @@ const Home=()=>{
 					<img src={BackgroundImg} alt='background'></img>
 				</div>
 				<div className={HomeCss.home}>
-					<Link to={'/api/Clothing'} className={HomeCss.box}>
+					<Link to={'/api/shopbybrand/The-North-Face'} className={HomeCss.box}>
 						<h5>The North Face</h5>
 						<div className={HomeCss.boxImg}>
 							<img src={homenorth} alt='img'></img>
 						</div>
 					</Link>
-					<Link to={'/api/Electronics'}className={HomeCss.boxx}>
+					<Link to={'/api/shopbybrand/Apple'}className={HomeCss.boxx}>
 						<h5>Apple Products</h5>
 						<div className={HomeCss.boxImg}>
 							<img src={apple} alt='img'></img>
 						</div>
 					</Link>
-					<Link to={'/api/Furniture'}className={HomeCss.box}>
+					<Link to={'/api/shopby/Livingroom'}className={HomeCss.box}>
 						<h5>Design your livingroom</h5>
 						<div className={HomeCss.boxImg}>
 							<img src={furniture} alt='img'></img>
