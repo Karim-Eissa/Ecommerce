@@ -5,27 +5,30 @@ const User = require('../models/usersModel')
   module.exports={	
 	myads_get: async (req, res) => {
 		const id=req.user._id
-		if(id==='650876d544c78ab9d3c0078e'){
+		console.log(id)
+		if(String(id) === '650876d544c78ab9d3c0078e'){
 			try {
+				console.log('one')
 				const data = await Product.find({}).sort({ createdAt: -1 });
 				if (data.length === 0) {
 					return res.status(404).json({ error: 'Products not found' });
 				}
 				res.json(data);
-				} catch (err) {
+			} catch (err) {
 				console.error('Error displaying products ', err);
 				res.status(500).json({ error: 'Internal server error' });
-				}
+			}
 		}else{
 			try {
-			const data = await Product.find({ user_id: id }).sort({ createdAt: -1 });
-			if (data.length === 0) {
-				return res.status(404).json({ error: 'Products not found' });
-			}
-			res.json(data);
+				console.log('two')
+				const data = await Product.find({ user_id: id }).sort({ createdAt: -1 });
+				if (data.length === 0) {
+					return res.status(404).json({ error: 'Products not found' });
+				}
+				res.json(data);
 			} catch (err) {
-			console.error('Error displaying products ', err);
-			res.status(500).json({ error: 'Internal server error' });
+				console.error('Error displaying products ', err);
+				res.status(500).json({ error: 'Internal server error' });
 			}
 		}
 	  },
