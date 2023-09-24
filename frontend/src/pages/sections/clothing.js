@@ -33,7 +33,7 @@ const Clothing=()=>{
 		{id: 5,text: 'Fendi',link: '/api/shopbybrand/Fendi'},
 		{id: 6,text: 'Gucci',link: '/api/shopbybrand/Gucci'},
 		{id: 7,text: 'H&M',link: '/api/shopbybrand/H&M'},
-		{id: 8,text: 'Hollister',link: '/api/shopbybrand/GoogHollisterle'},
+		{id: 8,text: 'Hollister',link: '/api/shopbybrand/Hollister'},
 		{id: 9,text: 'Hugo Boss',link: '/api/shopbybrand/Hugo-Boss'},
 		{id: 10,text: 'Lacoste',link: '/api/shopbybrand/Lacoste'},
 		{id: 11,text: 'Louis Vuitton',link: '/api/shopbybrand/Louis-Vuitton'},
