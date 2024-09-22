@@ -1,4 +1,5 @@
 const express= require('express');
+const path = require('path');
 const morgan=require('morgan');
 const cors=require('cors');
 const mongoose=require('mongoose');
@@ -27,8 +28,8 @@ mongoose.connect(process.env.dbURL)
 //routes
 app.use('/api',appRoutes);
 app.use('/user',authRoutes);
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
-app.use((req,res)=>{
-	res.json({error:'404 page not found'});
-})
-
+  app.use((req, res) => {
+	res.status(404).json({ error: '404 page not found' });
+  });

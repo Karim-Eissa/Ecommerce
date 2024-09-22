@@ -1,6 +1,6 @@
 import {Link} from 'react-router-dom'
 import css from './css/product.module.css'
-
+const backendURL = process.env.REACT_APP_BACKEND;
 const Product=(props)=>{
 	const content=props.content
 	return(
@@ -8,7 +8,7 @@ const Product=(props)=>{
 			{(content && content.map(product=>(
 				<Link to={'/api/product/'+product._id} className={css.productLink}>
 					<div className={css.productImg}>
-						{product.image && <img src={product.image} alt='product'></img>}
+						{product.image && <img src={`${backendURL}/uploads/${product.image}`} alt='product'></img>}
 					</div>
 					<p key={product._id} className={css.price}>${product.price}</p>
 					<h4 key={product._id}>{product.name}</h4>

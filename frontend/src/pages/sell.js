@@ -117,62 +117,68 @@ const Sell = () => {
     setThirdDropdownOptions(newOptions);
     setIsThirdDropdownDisabled(false);
   };
-  function convertTo64(e){
-	console.log(e)
-	var reader=new FileReader();
-	reader.readAsDataURL(e.target.files[0]);
-	reader.onload=()=>{
-		setImage(reader.result)
-	}
-	reader.onerror=error=>{
-		console.log('Error',error)
-	}
-	}
-  const handleFormSubmit = async (e) => {  
-	e.preventDefault();
-	  const confirmDelete = window.confirm('You are about to post this ad');
-	if(!user){
-		setError('You must be logged in')
-		return
-	}
-	if(confirmDelete){
-		const formData = {
-		base64:image,
-		category: firstDropdownValue,
-		type: secondDropdownValue,
-		brand,
-		name,
-		price,
-		color,
-		condition,
-		description,
-		};
-		try {
-			const response=await fetch(`${backendURL}/api/submit`, {
-				method: 'POST',
-				crossDomain:true,
-				headers: {
-				'Content-Type': 'application/json',
-				'Authorization':`Bearer ${user.token}`,
-				Accept:'application/json',
-				"Access-Control-Allow-Origin":"*"
-				},
-				body: JSON.stringify(formData),
-			});
-			navigate('/')
-			if (response.ok) {
-				setSuccess(true);
-				setError(false);
-			}else {
-				setError('Failed to post the ad');
-			}		
-		} catch (error) {
-		console.log('Error submitting data:', error);
-		setError('Failed to post the ad');
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    console.log("Selected file:", file);
+    setImage(file);
+};
+const logFormData = (formData) => {
+    for (let [key, value] of formData.entries()) {
+        console.log(key, value);
+    }
+};
+const handleFormSubmit = async (e) => {  
+    e.preventDefault();
+    
+    const confirmDelete = window.confirm('You are about to post this ad');
+    
+    if (!user) {
+        setError('You must be logged in');
+        return;
+    }
+    
+    if (confirmDelete) {
+        // Create a new FormData object
+        const formData = new FormData();
+        
+        // Append the image file to the form data
+        formData.append('file', image); // 'file' should match the key used in the backend route
 
-		}
-	}
-  };
+        // Append other fields to the form data
+        formData.append('category', firstDropdownValue);
+        formData.append('type', secondDropdownValue);
+        formData.append('brand', brand);
+        formData.append('name', name);
+        formData.append('price', price);
+        formData.append('color', color);
+        formData.append('condition', condition);
+        formData.append('description', description);
+		logFormData(formData);
+        try {
+            const response = await fetch(`${backendURL}/api/submit`, {
+                method: 'POST',
+                crossDomain: true,
+                headers: {
+                    'Authorization': `Bearer ${user.token}`, // Authorization header with JWT token
+                    "Access-Control-Allow-Origin": "*"
+                },
+                body: formData // Pass the FormData object as the body
+            });
+
+            if (response.ok) {
+                setSuccess(true);
+                setError(false);
+                navigate('/'); // Navigate only after successful submission
+            } else {
+                setError('Failed to post the ad');
+            }        
+        } catch (error) {
+            console.log('Error submitting data:', error);
+            setError('Failed to post the ad');
+        }
+    }
+};
+
   return (
 	<div className={SellCss.main}>
 		<form onSubmit={handleFormSubmit}>
@@ -182,7 +188,7 @@ const Sell = () => {
 			required
 			type='file'
 			accept='image/*'
-			onChange={convertTo64}
+			onChange={handleFileChange}
 			></input>
 			<label className={SellCss.label}>Category:</label>
 			<select required value={firstDropdownValue} onChange={(e)=>{

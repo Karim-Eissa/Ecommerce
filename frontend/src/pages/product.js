@@ -2,6 +2,7 @@ import {useParams } from 'react-router-dom'
 import css from './css/product.module.css'
 import useFetch from '../hooks/usefetch';
 import 'font-awesome/css/font-awesome.min.css';
+const backendURL = process.env.REACT_APP_BACKEND;
 const Product=()=>{
 	const { id } = useParams();
 	const {content,pending,error,errorTwo} =useFetch(`/api/product/${id}`)
@@ -17,7 +18,7 @@ const Product=()=>{
 				<div className={css.product}>
 					<div className={css.one}>
 						<div className={css.productImg}>
-							{content.image && <img src={content.image} alt='product'></img>}
+							{content.image && <img src={`${backendURL}/uploads/${content.image}`} alt='product'></img>}
 						</div>
 						<h2 className={css.h}><i className="fa fa-phone fa-xl" style={{ color: 'white' }} /> Contact seller: {content.seller.number}</h2>
 					</div>

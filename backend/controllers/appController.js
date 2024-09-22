@@ -1,7 +1,7 @@
 const express=require('express');
 const Product=require('../models/productModel');
 const User = require('../models/usersModel')
-
+const upload = require('../middleware/upload');
   module.exports={	
 	myads_get: async (req, res) => {
 		const id=req.user._id
@@ -117,21 +117,34 @@ const User = require('../models/usersModel')
 		  res.status(500).json({ error: 'Internal Server Error' });
 		}
 	  },
-	submit_post:async (req, res)=>{
+	  submit_post: async (req, res) => {
+		console.log(req.file)
+		const user_id = req.user._id;
+		const imagePath = req.file ? req.file.filename : null;
+
 		try {
-			const user_id=req.user._id
-			console.log('user id',user_id)
-			const { base64,name,category,type,brand,price,color,condition,description} = req.body;
-			console.log()
-			const newProduct = new Product({
-				image:base64,name,category,type,brand,price,color,condition,description,user_id
-			});
-			res.status(200).json({ message: 'Product saved successfully'})
-			await newProduct.save();
-			console.log('product saved')
-		  } catch (error) {
-			console.log(error)
-			res.status(500).json({ error: 'Internal Server Error' });
-		  }
-	}
+		const { name, category, type, brand, price, color, condition, description } = req.body;
+
+		const newProduct = new Product({
+			image: imagePath, 
+			name,
+			category,
+			type,
+			brand,
+			price,
+			color,
+			condition,
+			description,
+			user_id
+		});
+
+		await newProduct.save();
+
+		res.status(200).json({ message: 'Product saved successfully', product: newProduct });
+		console.log('Product saved successfully:', newProduct);
+		} catch (error) {
+		console.log('Error saving product:', error);
+		res.status(500).json({ error: 'Internal Server Error' });
+		}
+	  },
 };
